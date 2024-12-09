@@ -21,7 +21,7 @@ def fetch_and_summarize(query, tone, platform, language="en"):
         "platform": platform
     }
     try:
-        response = requests.post(BASE_URL + FETCH_SUMMARIZE_ENDPOINT, json=payload)
+        response = requests.post(BACKEND_URL + FETCH_SUMMARIZE_ENDPOINT, json=payload)
         if response.status_code == 200:
             return response.json()
         else:
@@ -35,7 +35,7 @@ def fetch_and_summarize(query, tone, platform, language="en"):
 def convert_text_to_speech(text):
     payload = {"text": text}
     try:
-        response = requests.post(BASE_URL + TTS_ENDPOINT, json=payload)
+        response = requests.post(BACKEND_URL + TTS_ENDPOINT, json=payload)
         if response.status_code == 200:
             return response.json().get("audio_file_path")
         else:
@@ -49,7 +49,7 @@ def convert_text_to_speech(text):
 def generate_image_from_summary(text):
     payload = {"text": text}
     try:
-        response = requests.post(BASE_URL + IMAGE_GEN_ENDPOINT, json=payload)
+        response = requests.post(BACKEND_URL + IMAGE_GEN_ENDPOINT, json=payload)
         if response.status_code == 200:
             return response.json().get("image_urls", [])
         else:
